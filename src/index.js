@@ -12,7 +12,10 @@ async function startApolloServer() {
 
     const app = express();
 
-    app.use(helmet({ contentSecurityPolicy: (process.env.NODE_ENV === 'production') ? undefined : false }));
+    app.use(helmet({ 
+                    contentSecurityPolicy: (process.env.NODE_ENV === 'production') ? undefined : false,
+                    crossOriginEmbedderPolicy: (process.env.NODE_ENV === 'production') ? undefined : false 
+                }));
     app.use(cors());
 
     const server = new ApolloServer({ typeDefs, resolvers })
