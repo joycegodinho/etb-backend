@@ -12,9 +12,9 @@ async function startApolloServer() {
 
     const app = express();
 
-    app.use(helmet({ 
+    app.use(helmet({
                     contentSecurityPolicy: (process.env.NODE_ENV === 'production') ? undefined : false,
-                    crossOriginEmbedderPolicy: (process.env.NODE_ENV === 'production') ? undefined : false 
+                    crossOriginEmbedderPolicy: (process.env.NODE_ENV === 'production') ? undefined : false
                 }));
     app.use(cors());
 
@@ -24,7 +24,7 @@ async function startApolloServer() {
 
     server.applyMiddleware({ app, path: '/api'});
 
-    app.listen({port}, () => console.log(`GraphQL Server running at http:${port}${server.graphqlPath}`));
+    app.listen({port}, () => console.log(`GraphQL Server running at http:localhost:${port}${server.graphqlPath}`));
 
     return {server, app}
 
