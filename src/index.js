@@ -2,6 +2,8 @@ const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
 const helmet = require('helmet');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const typeDefs = require('./schema')
 const resolvers = require('./resolvers/index')
@@ -18,7 +20,28 @@ async function startApolloServer() {
                 }));
     app.use(cors());
 
-    const server = new ApolloServer({ typeDefs, resolvers })
+    const getUser = token => {
+        if (token){
+            try {
+                return jwt.verify(token, process.env.JWT_SECRET)
+
+            } catch (err) {
+                throw new Error('Session invalid')
+
+            }
+        }
+    }
+
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers,
+        context: ({ req }) => {
+            const token = req.headers.authorization
+            const user = getUser(token)
+            console.log(user)
+            return { user }
+        }
+    })
 
     await server.start()
 

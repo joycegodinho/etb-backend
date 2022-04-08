@@ -3,7 +3,7 @@ const db_data = require('../../config/db')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const { AuthenticationError, ForbiddenError } = require('apollo-server-express');
-//const { user } = require('pg/lib/defaults');
+const { user } = require('pg/lib/defaults');
 require('dotenv').config();
 
 const client = new Client(db_data);

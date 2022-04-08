@@ -12,3 +12,9 @@ mutation {
     password: "password"
   )
 }
+
+query Etbs {
+  etbs {
+    id
+  }
+}

@@ -1,0 +1,40 @@
+const { Client } = require('pg')
+const db_data = require('../../config/db')
+const { AuthenticationError, ForbiddenError } = require('apollo-server-express');
+const { user } = require('pg/lib/defaults');
+
+
+const client = new Client(db_data);
+
+client.connect()
+.then(() => {
+    console.log("Conected to database")
+})
+.catch(() => {
+    throw new Error("Conection to database failed")
+})
+
+let stations = []
+
+
+module.exports = {
+    etbs: async (_, __, ) => {
+
+        const sql = 'SELECT * FROM pois'
+
+        try {
+            stations = client.query(sql)
+            console.log(stations)
+            stations = stations.rows
+            client.end()
+
+            return stations
+
+
+        } catch (err) {
+            console.log(err)
+            throw new Error('Error pulling stations')
+
+        }
+    }
+}
