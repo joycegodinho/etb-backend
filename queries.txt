@@ -1,0 +1,14 @@
+mutation {
+  signUp(
+    username: "Joyce",
+    email: "joyce@email.com",
+    password: "password"
+  )
+}
+
+mutation {
+  signIn(
+    email: "joyce@email.com",
+    password: "password"
+  )
+}
