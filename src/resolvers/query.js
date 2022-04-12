@@ -21,10 +21,12 @@ client.query('SELECT * FROM pois', (err, res) => {
 })
 
 module.exports = {
-    etbs: async (_, __, { user }) => {
-        if(!user) {
-            throw new AuthenticationError('You must be sign in to pull stations')
-        }
-        return stations
-    }
+    // etbs: async (_, __, { user }) => {
+    //     if(!user) {
+    //         throw new AuthenticationError('You must be sign in to pull stations')
+    //     }
+    //     return stations
+    // }
+
+    etbs: async () => stations
 }
